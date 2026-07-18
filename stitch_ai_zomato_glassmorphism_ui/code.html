@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Zomato AI Discovery - Culinary Velocity</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Lexend:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface-variant": "#e4bebc",
+                      "inverse-primary": "#bb162c",
+                      "secondary-fixed-dim": "#fabd00",
+                      "on-secondary-fixed": "#261a00",
+                      "surface-variant": "#2d3449",
+                      "on-error-container": "#ffdad6",
+                      "on-surface": "#dae2fd",
+                      "surface-container": "#171f33",
+                      "primary-fixed": "#ffdad8",
+                      "outline-variant": "#5b403f",
+                      "text-secondary": "#94A3B8",
+                      "outline": "#ab8987",
+                      "surface-container-highest": "#2d3449",
+                      "rating-gold": "#8C6115",
+                      "on-secondary-fixed-variant": "#5b4300",
+                      "surface-container-lowest": "#060e20",
+                      "on-primary-fixed": "#410007",
+                      "on-tertiary-container": "#00320d",
+                      "primary-container": "#ff535a",
+                      "on-secondary": "#3f2e00",
+                      "tertiary-fixed-dim": "#71dd7c",
+                      "surface-bright": "#31394d",
+                      "on-primary": "#680011",
+                      "on-background": "#dae2fd",
+                      "on-tertiary-fixed": "#002106",
+                      "surface-container-low": "#131b2e",
+                      "secondary-container": "#fabd00",
+                      "text-primary": "#FFFFFF",
+                      "error-container": "#93000a",
+                      "zomato-black": "#1C1C1C",
+                      "tertiary-fixed": "#8dfa96",
+                      "zomato-white": "#FFFFFF",
+                      "primary": "#E23744", /* Overridden to Zomato Red as requested */
+                      "on-primary-fixed-variant": "#92001c",
+                      "error": "#ffb4ab",
+                      "on-tertiary": "#003910",
+                      "primary-fixed-dim": "#ffb3b1",
+                      "on-primary-container": "#ffffff",
+                      "secondary-fixed": "#ffdf9e",
+                      "on-error": "#690005",
+                      "on-tertiary-fixed-variant": "#00531b",
+                      "on-secondary-container": "#6a4e00",
+                      "surface-dim": "#0b1326",
+                      "surface-card": "#0F172A",
+                      "surface-container-high": "#222a3d",
+                      "inverse-on-surface": "#283044",
+                      "tertiary": "#71dd7c",
+                      "background-deep": "#020617",
+                      "surface": "#0b1326",
+                      "background": "#0b1326",
+                      "inverse-surface": "#dae2fd",
+                      "tertiary-container": "#37a54c",
+                      "surface-tint": "#ffb3b1",
+                      "secondary": "#ffdf9e"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-mobile": "16px",
+                      "margin-desktop": "24px",
+                      "container-max": "1200px",
+                      "gutter": "16px",
+                      "base": "8px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": ["Lexend"],
+                      "body-md": ["Inter"],
+                      "headline-md": ["Lexend"],
+                      "label-sm": ["Inter"],
+                      "display-lg": ["Lexend"],
+                      "headline-lg": ["Lexend"],
+                      "body-lg": ["Inter"],
+                      "label-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "500"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+        body {
+            background-color: #0b1326;
+            color: #dae2fd;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .font-lexend { font-family: 'Lexend', sans-serif; }
+
+        .zomato-card {
+            background: #171f33;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.3s ease;
+        }
+
+        .zomato-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+            border-color: rgba(226, 55, 68, 0.3);
+        }
+
+        .zomato-input {
+            background: #1c253d;
+            border: 1px solid #2d3449;
+            color: #ffffff;
+            transition: all 0.2s ease;
+        }
+
+        .zomato-input:focus {
+            border-color: #E23744;
+            box-shadow: 0 0 0 1px #E23744;
+            outline: none;
+        }
+
+        .primary-btn {
+            background-color: #E23744;
+            color: #ffffff;
+            transition: all 0.2s ease;
+        }
+
+        .primary-btn:hover {
+            background-color: #f04451;
+            transform: scale(1.01);
+        }
+
+        .ai-gradient-text {
+            background: linear-gradient(135deg, #E23744 0%, #fabd00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .skeleton {
+            animation: pulse-skeleton 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            background: #2d3449;
+            border-radius: 8px;
+        }
+
+        @keyframes pulse-skeleton {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .result-card {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .result-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .toast {
+            transform: translateY(100%);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-lg border-b border-white/5">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-[1200px] mx-auto w-full">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-2xl" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+</div>
+<span class="font-headline-md text-headline-md font-bold text-white tracking-tight font-lexend">zomato <span class="font-normal text-primary">AI</span></span>
+</div>
+<div class="hidden lg:flex flex-grow max-w-md mx-8">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary text-xl">search</span>
+<input class="w-full pl-10 pr-4 py-2.5 rounded-xl zomato-input text-sm font-body-md" placeholder="Search for restaurant, cuisine or a dish" type="text"/>
+</div>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-label-lg text-label-lg text-primary" href="#">Discover</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-white transition-all" href="#">Dining Out</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-white transition-all" href="#">Nightlife</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-white">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface text-xl">person</span>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-grow pt-24 pb-20 px-margin-mobile md:px-margin-desktop max-w-[1200px] mx-auto w-full flex flex-col gap-10">
+<!-- Hero Section -->
+<section class="mt-12 text-center flex flex-col items-center gap-4">
+<h1 class="font-lexend text-display-lg text-white leading-tight">
+            Find the perfect spot with <br/>
+<span class="ai-gradient-text">Zomato AI Discovery</span>
+</h1>
+<p class="font-body-lg text-text-secondary max-w-xl">
+            Describe your craving, mood, or occasion and let our AI concierge curate the best dining experiences for you.
+        </p>
+</section>
+<!-- Form Section -->
+<section class="w-full max-w-4xl mx-auto">
+<div class="zomato-card rounded-2xl p-8 shadow-2xl">
+<form class="space-y-6" id="preferences-form">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="space-y-2">
+<label class="font-lexend text-label-lg text-on-surface-variant">Location</label>
+<select class="zomato-input rounded-xl px-4 py-3 w-full font-body-md appearance-none">
+<option>Indiranagar, Bangalore</option>
+<option>Koramangala, Bangalore</option>
+<option>Whitefield, Bangalore</option>
+<option>HSR Layout, Bangalore</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="font-lexend text-label-lg text-on-surface-variant">Cuisine</label>
+<select class="zomato-input rounded-xl px-4 py-3 w-full font-body-md appearance-none">
+<option>Any Cuisine</option>
+<option>North Indian</option>
+<option>South Indian</option>
+<option>Italian &amp; Continental</option>
+<option>Pan Asian</option>
+</select>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-center mb-1">
+<label class="font-lexend text-label-lg text-on-surface-variant">Rating</label>
+<span class="text-primary font-bold" id="rating-val">4.0+</span>
+</div>
+<div class="pt-2">
+<input class="w-full h-1.5 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary" id="rating-slider" max="5" min="3" step="0.1" type="range" value="4.0"/>
+</div>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-lexend text-label-lg text-on-surface-variant">What are you looking for?</label>
+<textarea class="zomato-input rounded-xl px-4 py-4 w-full font-body-md resize-none min-h-[100px]" placeholder="e.g. 'A cozy outdoor cafe for brunch with pets, must have great coffee and sourdough toast'"></textarea>
+</div>
+<div class="flex justify-center">
+<button class="primary-btn px-12 py-4 rounded-xl font-lexend font-semibold text-lg flex items-center gap-3 shadow-lg shadow-primary/20" type="submit">
+<span class="material-symbols-outlined">auto_awesome</span>
+                        Generate Recommendations
+                    </button>
+</div>
+</form>
+</div>
+</section>
+<!-- Loading State -->
+<div class="hidden flex flex-col gap-8 w-full" id="loading-state">
+<div class="flex items-center gap-3 text-primary font-lexend font-medium justify-center py-8">
+<span class="material-symbols-outlined animate-spin">refresh</span>
+            AI is analyzing 2,400+ venues based on your preferences...
+        </div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="zomato-card rounded-2xl overflow-hidden p-0 h-[420px]">
+<div class="skeleton h-56 w-full rounded-none"></div>
+<div class="p-5 space-y-4">
+<div class="skeleton h-8 w-3/4"></div>
+<div class="skeleton h-4 w-1/2"></div>
+<div class="skeleton h-20 w-full mt-4"></div>
+</div>
+</div>
+<div class="zomato-card rounded-2xl overflow-hidden p-0 h-[420px] hidden md:block">
+<div class="skeleton h-56 w-full rounded-none"></div>
+<div class="p-5 space-y-4">
+<div class="skeleton h-8 w-3/4"></div>
+<div class="skeleton h-4 w-1/2"></div>
+<div class="skeleton h-20 w-full mt-4"></div>
+</div>
+</div>
+<div class="zomato-card rounded-2xl overflow-hidden p-0 h-[420px] hidden lg:block">
+<div class="skeleton h-56 w-full rounded-none"></div>
+<div class="p-5 space-y-4">
+<div class="skeleton h-8 w-3/4"></div>
+<div class="skeleton h-4 w-1/2"></div>
+<div class="skeleton h-20 w-full mt-4"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Results Container -->
+<div class="hidden flex flex-col gap-8 w-full" id="results">
+<div class="flex justify-between items-end border-b border-white/5 pb-4">
+<h2 class="font-lexend text-headline-lg text-white">Recommended for you</h2>
+<div class="flex items-center gap-2 text-text-secondary text-sm">
+<span class="material-symbols-outlined text-sm">info</span>
+                Ranked by AI matching score
+            </div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Result Card 1 -->
+<article class="result-card zomato-card rounded-2xl overflow-hidden flex flex-col group cursor-pointer">
+<div class="relative h-56 w-full overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC9iyexQ2YsiDyF_usFMgKpnK1t3re77nua66SJlQ53dhM8y00afTxMINEjfIkFxGH-2eZia4JF_qKYhO0SOPxke8HkQi2K9IKiE6C13nizjbDFHPhmwnMUW4V6Z__m3GyOEpB55XIhKQR1rymRoxGicuQoFVop4NqTmASCy1e-c8RsRhfs6aXMo1kN6jlsyLosJEHwsqCL2umey04GDaGvkIbhxRgno3LHO8nFrMs74sJRpqI12KDw3DCk5L8JrY8051B9OFqkusiK')"></div>
+<div class="absolute top-4 left-4 z-20 bg-primary text-white font-lexend text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 shadow-lg">
+<span class="material-symbols-outlined text-[14px]">auto_awesome</span> AI CHOICE
+                    </div>
+<div class="absolute top-4 right-4 z-20 bg-white text-zomato-black font-lexend text-sm font-bold px-2 py-1 rounded-lg flex items-center gap-1 shadow-md">
+                        4.8 <span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-lexend text-headline-md text-white">The Glass House</h3>
+<span class="text-text-secondary text-sm">₹₹₹</span>
+</div>
+<p class="text-text-secondary text-sm mb-4">European, Mediterranean • Indiranagar</p>
+<div class="bg-surface-container-low border border-white/5 rounded-xl p-4 mb-6">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5">psychology</span>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                                "Matches your 'cozy outdoor' preference perfectly. Their weekend brunch is award-winning and the outdoor patio is indeed pet-friendly as requested."
+                            </p>
+</div>
+</div>
+<div class="mt-auto flex gap-3">
+<button class="flex-1 border border-white/10 hover:bg-white/5 text-white py-2.5 rounded-xl font-lexend text-sm transition-colors">Details</button>
+<button class="flex-1 primary-btn py-2.5 rounded-xl font-lexend text-sm font-semibold flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">event_available</span> Book Table
+                        </button>
+</div>
+</div>
+</article>
+<!-- Result Card 2 -->
+<article class="result-card zomato-card rounded-2xl overflow-hidden flex flex-col group cursor-pointer" style="transition-delay: 100ms;">
+<div class="relative h-56 w-full overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDpHbUlH8K8X3Bx0LnchnyOfsVBFdfYrRG6grnMkZ8A9sxBisJBQukkQmULmVTcsonv8zxv8yHtfNS3bNpbAP__bn9w9VXZHli1vitBrEtQagUbZeBeO_ejXsCisGCX-qZxZN3TVadO9feYl4NF0lI8DufwbN6OI0wt5dhB7lStPMBkUPnISfY-3PvDnLYBKfGkAWWArkaCU-kRp2FH-m2fVsP5bGsXRdAovTG83_WGpqMMhzsSPJTK4avapihVbxhUb5_F0Z9wCxn_')"></div>
+<div class="absolute top-4 right-4 z-20 bg-white text-zomato-black font-lexend text-sm font-bold px-2 py-1 rounded-lg flex items-center gap-1 shadow-md">
+                        4.5 <span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-lexend text-headline-md text-white">Glen's Bakehouse</h3>
+<span class="text-text-secondary text-sm">₹₹</span>
+</div>
+<p class="text-text-secondary text-sm mb-4">Bakery, Cafe • Koramangala</p>
+<div class="bg-surface-container-low border border-white/5 rounded-xl p-4 mb-6">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5">psychology</span>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                                "High match for 'sourdough toast' cravings. Known for a very intimate atmosphere and some of the best coffee in the city center."
+                            </p>
+</div>
+</div>
+<div class="mt-auto flex gap-3">
+<button class="flex-1 border border-white/10 hover:bg-white/5 text-white py-2.5 rounded-xl font-lexend text-sm transition-colors">Details</button>
+<button class="flex-1 primary-btn py-2.5 rounded-xl font-lexend text-sm font-semibold flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">shopping_bag</span> Order Now
+                        </button>
+</div>
+</div>
+</article>
+<!-- Result Card 3 -->
+<article class="result-card zomato-card rounded-2xl overflow-hidden flex flex-col group cursor-pointer" style="transition-delay: 200ms;">
+<div class="relative h-56 w-full overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAESBMWG3qfXHv9T659NfGyeWgmZbNk3ManHGLZ3IQmB8xujMqXZZi3yU35cx7MDzryoNX0oR94W5U-GTZxFHsW_B6h31f1cQH23aNTzekt7Wn6JU9DvI0ZsC4NbqbOzl0Ubwq2K905P4f_4VkDSl250S7Ojts4EJrdpHGFm2Mrz2ykzsvXnJLroOyUIpsM0kbaaG6IDZx2TLO6XImx1aFMsPnShu_97YFzP5eeFBBymSOIPskREn4AVC9OpheayaLmypVDX6Vv1eIj')"></div>
+<div class="absolute top-4 right-4 z-20 bg-white text-zomato-black font-lexend text-sm font-bold px-2 py-1 rounded-lg flex items-center gap-1 shadow-md">
+                        4.3 <span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-lexend text-headline-md text-white">Bistro Claytopia</h3>
+<span class="text-text-secondary text-sm">₹₹</span>
+</div>
+<p class="text-text-secondary text-sm mb-4">Continental, Burger • Indiranagar</p>
+<div class="bg-surface-container-low border border-white/5 rounded-xl p-4 mb-6">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5">psychology</span>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                                "A classic 'pet-friendly' choice. The outdoor seating matches your vibe request perfectly, though it's more casual than The Glass House."
+                            </p>
+</div>
+</div>
+<div class="mt-auto flex gap-3">
+<button class="flex-1 border border-white/10 hover:bg-white/5 text-white py-2.5 rounded-xl font-lexend text-sm transition-colors">Details</button>
+<button class="flex-1 primary-btn py-2.5 rounded-xl font-lexend text-sm font-semibold flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">event_available</span> Book Table
+                        </button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 mt-12 bg-surface-container-lowest border-t border-white/5">
+<div class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="flex flex-col md:flex-row justify-between items-start gap-12 mb-12">
+<div class="space-y-4 max-w-xs">
+<div class="flex items-center gap-2">
+<span class="font-lexend text-2xl font-bold text-white tracking-tight">zomato <span class="font-normal text-primary">AI</span></span>
+</div>
+<p class="text-sm text-text-secondary leading-relaxed font-body-md">
+                    Transforming dining discovery with advanced AI. Find exactly what your palate desires in seconds.
+                </p>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-12">
+<div class="space-y-4">
+<h4 class="font-lexend text-white font-semibold text-sm uppercase tracking-widest">Company</h4>
+<nav class="flex flex-col gap-2">
+<a class="text-sm text-text-secondary hover:text-white transition-colors" href="#">Who We Are</a>
+<a class="text-sm text-text-secondary hover:text-white transition-colors" href="#">Careers</a>
+<a class="text-sm text-text-secondary hover:text-white transition-colors" href="#">Blog</a>
+</nav>
+</div>
+<div class="space-y-4">
+<h4 class="font-lexend text-white font-semibold text-sm uppercase tracking-widest">For Restaurants</h4>
+<nav class="flex flex-col gap-2">
+<a class="text-sm text-text-secondary hover:text-white transition-colors" href="#">Partner With Us</a>
+<a class="text-sm text-text-secondary hover:text-white transition-colors" href="#">Apps For You</a>
+</nav>
+</div>
+<div class="space-y-4">
+<h4 class="font-lexend text-white font-semibold text-sm uppercase tracking-widest">Learn More</h4>
+<nav class="flex flex-col gap-2">
+<a class="text-sm text-text-secondary hover:text-white transition-colors" href="#">Privacy</a>
+<a class="text-sm text-text-secondary hover:text-white transition-colors" href="#">Security</a>
+<a class="text-sm text-text-secondary hover:text-white transition-colors" href="#">Terms</a>
+</nav>
+</div>
+</div>
+</div>
+<div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-xs text-text-secondary">© 2024 Zomato AI Discovery. All rights reserved.</p>
+<div class="flex gap-4">
+<a class="text-text-secondary hover:text-white" href="#"><span class="material-symbols-outlined text-xl">language</span></a>
+<a class="text-text-secondary hover:text-white" href="#"><span class="material-symbols-outlined text-xl">share</span></a>
+</div>
+</div>
+</div>
+</footer>
+<!-- Toast Notification -->
+<div class="toast fixed bottom-8 left-1/2 -translate-x-1/2 z-50 rounded-xl px-6 py-3 flex items-center gap-3 bg-white shadow-2xl text-zomato-black border border-primary/20" id="toast">
+<span class="material-symbols-outlined text-primary">verified</span>
+<span class="font-lexend font-medium text-sm" id="toast-message">Curated matches found for you!</span>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('preferences-form');
+        const loadingState = document.getElementById('loading-state');
+        const resultsContainer = document.getElementById('results');
+        const toast = document.getElementById('toast');
+        const slider = document.getElementById('rating-slider');
+        const sliderVal = document.getElementById('rating-val');
+
+        slider.addEventListener('input', (e) => {
+            sliderVal.textContent = parseFloat(e.target.value).toFixed(1) + '+';
+        });
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            resultsContainer.classList.add('hidden');
+            document.querySelectorAll('.result-card').forEach(card => card.classList.remove('visible'));
+            
+            loadingState.classList.remove('hidden');
+            
+            // Scroll to results/loading
+            loadingState.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            setTimeout(() => {
+                loadingState.classList.add('hidden');
+                resultsContainer.classList.remove('hidden');
+                
+                void resultsContainer.offsetWidth;
+                
+                document.querySelectorAll('.result-card').forEach((card, index) => {
+                    setTimeout(() => {
+                        card.classList.add('visible');
+                    }, index * 100);
+                });
+                
+                showToast('AI Discovery engine refined 3 ideal matches.');
+            }, 1800);
+        });
+        
+        function showToast(msg) {
+            document.getElementById('toast-message').textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+    });
+</script>
+</body></html>

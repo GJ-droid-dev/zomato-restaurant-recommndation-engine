@@ -1,0 +1,551 @@
+2026-07-18T05:58:39.036962359Z [inf]  Starting Container
+2026-07-18T05:58:40.264556039Z [err]    File "/app/backend/main.py", line 26, in startup_event
+2026-07-18T05:58:40.264572188Z [err]      await self._router._startup()
+2026-07-18T05:58:40.264572208Z [err]  INFO:     Started server process [1]
+2026-07-18T05:58:40.264572308Z [err]             ^^^^^^^^^^^^^^^^^^^^^
+2026-07-18T05:58:40.264578368Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 233, in merged_lifespan
+2026-07-18T05:58:40.264585518Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 6326, in _startup
+2026-07-18T05:58:40.264587738Z [err]      async with original_context(app) as maybe_original_state:
+2026-07-18T05:58:40.264588168Z [err]  INFO:     Waiting for application startup.
+2026-07-18T05:58:40.264592218Z [err]      await handler()
+2026-07-18T05:58:40.264597008Z [err]  INFO:backend.main:Initializing application... Preloading dataset...
+2026-07-18T05:58:40.264599668Z [err]                 ~~~~~~~~~~~~~~~~^^^^^
+2026-07-18T05:58:40.264603398Z [err]  INFO:backend.services.data_loader:Loading dataset from /app/backend/../data/zomato.csv...
+2026-07-18T05:58:40.264609698Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 258, in __aenter__
+2026-07-18T05:58:40.264611278Z [err]  ERROR:backend.services.data_loader:FATAL: zomato.csv not found at /app/backend/../data/zomato.csv
+2026-07-18T05:58:40.264616738Z [err]  ERROR:    Traceback (most recent call last):
+2026-07-18T05:58:40.264620488Z [err]    File "/app/.venv/lib/python3.13/site-packages/starlette/routing.py", line 638, in lifespan
+2026-07-18T05:58:40.264624678Z [err]      async with self.lifespan_context(app) as maybe_state:
+2026-07-18T05:58:40.264628788Z [err]                 ~~~~~~~~~~~~~~~~~~~~~^^^^^
+2026-07-18T05:58:40.264632258Z [err]    File "/mise/installs/python/3.13.14/lib/python3.13/contextlib.py", line 214, in __aenter__
+2026-07-18T05:58:40.264635758Z [err]      return await anext(self.gen)
+2026-07-18T05:58:40.265771254Z [err]                     ~~~~~~~~~~^
+2026-07-18T05:58:40.265774464Z [err]      load_and_clean_data()
+2026-07-18T05:58:40.265774624Z [err]          f,
+2026-07-18T05:58:40.265777504Z [err]          ^^
+2026-07-18T05:58:40.265778364Z [err]      ~~~~~~~~~~~~~~~~~~~^^
+2026-07-18T05:58:40.265780984Z [err]      ...<6 lines>...
+2026-07-18T05:58:40.265781044Z [err]    File "/app/backend/services/data_loader.py", line 20, in load_and_clean_data
+2026-07-18T05:58:40.265783853Z [err]          storage_options=self.options.get("storage_options", None),
+2026-07-18T05:58:40.265784363Z [err]      df = pd.read_csv(DATA_PATH)
+2026-07-18T05:58:40.265786903Z [err]          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-18T05:58:40.265787223Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 873, in read_csv
+2026-07-18T05:58:40.265790073Z [err]      )
+2026-07-18T05:58:40.265790713Z [err]      return _read(filepath_or_buffer, kwds)
+2026-07-18T05:58:40.265792933Z [err]      ^
+2026-07-18T05:58:40.265793533Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 300, in _read
+2026-07-18T05:58:40.265796093Z [err]      parser = TextFileReader(filepath_or_buffer, **kwds)
+2026-07-18T05:58:40.265796303Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/common.py", line 930, in get_handle
+2026-07-18T05:58:40.265798913Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1645, in __init__
+2026-07-18T05:58:40.265802133Z [err]      self._engine = self._make_engine(f, self.engine)
+2026-07-18T05:58:40.265804653Z [err]                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+2026-07-18T05:58:40.265808243Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1904, in _make_engine
+2026-07-18T05:58:40.265810953Z [err]      self.handles = get_handle(
+2026-07-18T05:58:40.266125360Z [err]      handle = open(
+2026-07-18T05:58:40.266132200Z [err]          handle,
+2026-07-18T05:58:40.266138840Z [err]      ...<3 lines>...
+2026-07-18T05:58:40.266143209Z [err]          newline="",
+2026-07-18T05:58:40.266147409Z [err]      )
+2026-07-18T05:58:40.266151819Z [err]  FileNotFoundError: [Errno 2] No such file or directory: '/app/backend/../data/zomato.csv'
+2026-07-18T05:58:40.266156199Z [err]  
+2026-07-18T05:58:40.266160319Z [err]  ERROR:    Application startup failed. Exiting.
+2026-07-18T05:58:41.033362121Z [err]  INFO:     Started server process [1]
+2026-07-18T05:58:41.033364711Z [err]  INFO:     Waiting for application startup.
+2026-07-18T05:58:41.033367071Z [err]  INFO:backend.main:Initializing application... Preloading dataset...
+2026-07-18T05:58:41.033369711Z [err]  INFO:backend.services.data_loader:Loading dataset from /app/backend/../data/zomato.csv...
+2026-07-18T05:58:41.033372421Z [err]  ERROR:backend.services.data_loader:FATAL: zomato.csv not found at /app/backend/../data/zomato.csv
+2026-07-18T05:58:41.033374691Z [err]  ERROR:    Traceback (most recent call last):
+2026-07-18T05:58:41.033376971Z [err]    File "/app/.venv/lib/python3.13/site-packages/starlette/routing.py", line 638, in lifespan
+2026-07-18T05:58:41.033379501Z [err]      async with self.lifespan_context(app) as maybe_state:
+2026-07-18T05:58:41.033382231Z [err]                 ~~~~~~~~~~~~~~~~~~~~~^^^^^
+2026-07-18T05:58:41.033385461Z [err]    File "/mise/installs/python/3.13.14/lib/python3.13/contextlib.py", line 214, in __aenter__
+2026-07-18T05:58:41.033387751Z [err]      return await anext(self.gen)
+2026-07-18T05:58:41.033390051Z [err]             ^^^^^^^^^^^^^^^^^^^^^
+2026-07-18T05:58:41.033392431Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 233, in merged_lifespan
+2026-07-18T05:58:41.033394921Z [err]      async with original_context(app) as maybe_original_state:
+2026-07-18T05:58:41.033397521Z [err]                 ~~~~~~~~~~~~~~~~^^^^^
+2026-07-18T05:58:41.033399931Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 258, in __aenter__
+2026-07-18T05:58:41.033402181Z [err]      await self._router._startup()
+2026-07-18T05:58:41.033404591Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 6326, in _startup
+2026-07-18T05:58:41.033407721Z [err]      await handler()
+2026-07-18T05:58:41.033410701Z [err]    File "/app/backend/main.py", line 26, in startup_event
+2026-07-18T05:58:41.033906775Z [err]      load_and_clean_data()
+2026-07-18T05:58:41.033910905Z [err]      ~~~~~~~~~~~~~~~~~~~^^
+2026-07-18T05:58:41.033913735Z [err]    File "/app/backend/services/data_loader.py", line 20, in load_and_clean_data
+2026-07-18T05:58:41.033917045Z [err]      df = pd.read_csv(DATA_PATH)
+2026-07-18T05:58:41.033920795Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 873, in read_csv
+2026-07-18T05:58:41.033923935Z [err]      return _read(filepath_or_buffer, kwds)
+2026-07-18T05:58:41.033927335Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 300, in _read
+2026-07-18T05:58:41.033930674Z [err]      parser = TextFileReader(filepath_or_buffer, **kwds)
+2026-07-18T05:58:41.033933644Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1645, in __init__
+2026-07-18T05:58:41.033937224Z [err]      self._engine = self._make_engine(f, self.engine)
+2026-07-18T05:58:41.033940394Z [err]                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+2026-07-18T05:58:41.033943434Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1904, in _make_engine
+2026-07-18T05:58:41.033946564Z [err]      self.handles = get_handle(
+2026-07-18T05:58:41.033949684Z [err]                     ~~~~~~~~~~^
+2026-07-18T05:58:41.033953754Z [err]          f,
+2026-07-18T05:58:41.033958674Z [err]          ^^
+2026-07-18T05:58:41.033961784Z [err]      ...<6 lines>...
+2026-07-18T05:58:41.033965414Z [err]          storage_options=self.options.get("storage_options", None),
+2026-07-18T05:58:41.033968364Z [err]          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-18T05:58:41.033971224Z [err]      )
+2026-07-18T05:58:41.033973954Z [err]      ^
+2026-07-18T05:58:41.033977974Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/common.py", line 930, in get_handle
+2026-07-18T05:58:41.034117772Z [err]      handle = open(
+2026-07-18T05:58:41.034123252Z [err]          handle,
+2026-07-18T05:58:41.034126292Z [err]      ...<3 lines>...
+2026-07-18T05:58:41.034128862Z [err]          newline="",
+2026-07-18T05:58:41.034131352Z [err]      )
+2026-07-18T05:58:41.034133732Z [err]  FileNotFoundError: [Errno 2] No such file or directory: '/app/backend/../data/zomato.csv'
+2026-07-18T05:58:41.034136322Z [err]  
+2026-07-18T05:58:41.034139412Z [err]  ERROR:    Application startup failed. Exiting.
+2026-07-18T05:58:42.888274264Z [err]                 ~~~~~~~~~~~~~~~~^^^^^
+2026-07-18T05:58:42.888281354Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 258, in __aenter__
+2026-07-18T05:58:42.888287663Z [err]      await self._router._startup()
+2026-07-18T05:58:42.888292153Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 6326, in _startup
+2026-07-18T05:58:42.888296493Z [err]      await handler()
+2026-07-18T05:58:42.888300113Z [err]    File "/app/backend/main.py", line 26, in startup_event
+2026-07-18T05:58:42.888322753Z [err]  INFO:     Started server process [1]
+2026-07-18T05:58:42.888326563Z [err]  INFO:     Waiting for application startup.
+2026-07-18T05:58:42.888330463Z [err]  INFO:backend.main:Initializing application... Preloading dataset...
+2026-07-18T05:58:42.888334423Z [err]  INFO:backend.services.data_loader:Loading dataset from /app/backend/../data/zomato.csv...
+2026-07-18T05:58:42.888338173Z [err]  ERROR:backend.services.data_loader:FATAL: zomato.csv not found at /app/backend/../data/zomato.csv
+2026-07-18T05:58:42.888341603Z [err]  ERROR:    Traceback (most recent call last):
+2026-07-18T05:58:42.888345543Z [err]    File "/app/.venv/lib/python3.13/site-packages/starlette/routing.py", line 638, in lifespan
+2026-07-18T05:58:42.888349693Z [err]      async with self.lifespan_context(app) as maybe_state:
+2026-07-18T05:58:42.888353223Z [err]                 ~~~~~~~~~~~~~~~~~~~~~^^^^^
+2026-07-18T05:58:42.888357143Z [err]    File "/mise/installs/python/3.13.14/lib/python3.13/contextlib.py", line 214, in __aenter__
+2026-07-18T05:58:42.888360862Z [err]      return await anext(self.gen)
+2026-07-18T05:58:42.888364302Z [err]             ^^^^^^^^^^^^^^^^^^^^^
+2026-07-18T05:58:42.888373602Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 233, in merged_lifespan
+2026-07-18T05:58:42.888377042Z [err]      async with original_context(app) as maybe_original_state:
+2026-07-18T05:58:42.888518470Z [err]      load_and_clean_data()
+2026-07-18T05:58:42.888522690Z [err]      ~~~~~~~~~~~~~~~~~~~^^
+2026-07-18T05:58:42.888525420Z [err]    File "/app/backend/services/data_loader.py", line 20, in load_and_clean_data
+2026-07-18T05:58:42.888528680Z [err]      df = pd.read_csv(DATA_PATH)
+2026-07-18T05:58:42.888531110Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 873, in read_csv
+2026-07-18T05:58:42.888533520Z [err]      return _read(filepath_or_buffer, kwds)
+2026-07-18T05:58:42.888535860Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 300, in _read
+2026-07-18T05:58:42.888538180Z [err]      parser = TextFileReader(filepath_or_buffer, **kwds)
+2026-07-18T05:58:42.888540350Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1645, in __init__
+2026-07-18T05:58:42.888543061Z [err]      self._engine = self._make_engine(f, self.engine)
+2026-07-18T05:58:42.888546121Z [err]                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+2026-07-18T05:58:42.888548871Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1904, in _make_engine
+2026-07-18T05:58:42.888551261Z [err]      self.handles = get_handle(
+2026-07-18T05:58:42.888553961Z [err]                     ~~~~~~~~~~^
+2026-07-18T05:58:42.888556341Z [err]          f,
+2026-07-18T05:58:42.888558781Z [err]          ^^
+2026-07-18T05:58:42.888560991Z [err]      ...<6 lines>...
+2026-07-18T05:58:42.888563261Z [err]          storage_options=self.options.get("storage_options", None),
+2026-07-18T05:58:42.888565491Z [err]          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-18T05:58:42.888568041Z [err]      )
+2026-07-18T05:58:42.888570401Z [err]      ^
+2026-07-18T05:58:42.888572811Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/common.py", line 930, in get_handle
+2026-07-18T05:58:42.889089523Z [err]  FileNotFoundError: [Errno 2] No such file or directory: '/app/backend/../data/zomato.csv'
+2026-07-18T05:58:42.889093163Z [err]  
+2026-07-18T05:58:42.889095133Z [err]      handle = open(
+2026-07-18T05:58:42.889097233Z [err]  ERROR:    Application startup failed. Exiting.
+2026-07-18T05:58:42.889100273Z [err]          handle,
+2026-07-18T05:58:42.889103783Z [err]      ...<3 lines>...
+2026-07-18T05:58:42.889107343Z [err]          newline="",
+2026-07-18T05:58:42.889111093Z [err]      )
+2026-07-18T05:58:44.692645759Z [err]  INFO:     Started server process [1]
+2026-07-18T05:58:44.692649659Z [err]  INFO:     Waiting for application startup.
+2026-07-18T05:58:44.692652449Z [err]  INFO:backend.main:Initializing application... Preloading dataset...
+2026-07-18T05:58:44.692654929Z [err]  INFO:backend.services.data_loader:Loading dataset from /app/backend/../data/zomato.csv...
+2026-07-18T05:58:44.692657899Z [err]  ERROR:backend.services.data_loader:FATAL: zomato.csv not found at /app/backend/../data/zomato.csv
+2026-07-18T05:58:44.692660149Z [err]  ERROR:    Traceback (most recent call last):
+2026-07-18T05:58:44.692662999Z [err]    File "/app/.venv/lib/python3.13/site-packages/starlette/routing.py", line 638, in lifespan
+2026-07-18T05:58:44.692666219Z [err]      async with self.lifespan_context(app) as maybe_state:
+2026-07-18T05:58:44.692668659Z [err]                 ~~~~~~~~~~~~~~~~~~~~~^^^^^
+2026-07-18T05:58:44.692670989Z [err]    File "/mise/installs/python/3.13.14/lib/python3.13/contextlib.py", line 214, in __aenter__
+2026-07-18T05:58:44.692673459Z [err]      return await anext(self.gen)
+2026-07-18T05:58:44.692675739Z [err]             ^^^^^^^^^^^^^^^^^^^^^
+2026-07-18T05:58:44.692677929Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 233, in merged_lifespan
+2026-07-18T05:58:44.692680179Z [err]      async with original_context(app) as maybe_original_state:
+2026-07-18T05:58:44.692682339Z [err]                 ~~~~~~~~~~~~~~~~^^^^^
+2026-07-18T05:58:44.692684389Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 258, in __aenter__
+2026-07-18T05:58:44.692686909Z [err]      await self._router._startup()
+2026-07-18T05:58:44.692689139Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 6326, in _startup
+2026-07-18T05:58:44.692691129Z [err]      await handler()
+2026-07-18T05:58:44.692693159Z [err]    File "/app/backend/main.py", line 26, in startup_event
+2026-07-18T05:58:44.693713576Z [err]      load_and_clean_data()
+2026-07-18T05:58:44.693716795Z [err]      ~~~~~~~~~~~~~~~~~~~^^
+2026-07-18T05:58:44.693719575Z [err]    File "/app/backend/services/data_loader.py", line 20, in load_and_clean_data
+2026-07-18T05:58:44.693721775Z [err]      df = pd.read_csv(DATA_PATH)
+2026-07-18T05:58:44.693724505Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 873, in read_csv
+2026-07-18T05:58:44.693726625Z [err]      return _read(filepath_or_buffer, kwds)
+2026-07-18T05:58:44.693728815Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 300, in _read
+2026-07-18T05:58:44.693731465Z [err]      parser = TextFileReader(filepath_or_buffer, **kwds)
+2026-07-18T05:58:44.693733485Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1645, in __init__
+2026-07-18T05:58:44.693735505Z [err]      self._engine = self._make_engine(f, self.engine)
+2026-07-18T05:58:44.693737665Z [err]                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+2026-07-18T05:58:44.693742275Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1904, in _make_engine
+2026-07-18T05:58:44.693744945Z [err]      self.handles = get_handle(
+2026-07-18T05:58:44.693747205Z [err]                     ~~~~~~~~~~^
+2026-07-18T05:58:44.693750075Z [err]          f,
+2026-07-18T05:58:44.693752375Z [err]          ^^
+2026-07-18T05:58:44.693754395Z [err]      ...<6 lines>...
+2026-07-18T05:58:44.693757065Z [err]          storage_options=self.options.get("storage_options", None),
+2026-07-18T05:58:44.693760075Z [err]          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-18T05:58:44.693762805Z [err]      )
+2026-07-18T05:58:44.693764915Z [err]      ^
+2026-07-18T05:58:44.693767065Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/common.py", line 930, in get_handle
+2026-07-18T05:58:44.694628965Z [err]      handle = open(
+2026-07-18T05:58:44.694631535Z [err]          handle,
+2026-07-18T05:58:44.694633805Z [err]      ...<3 lines>...
+2026-07-18T05:58:44.694636525Z [err]          newline="",
+2026-07-18T05:58:44.694638885Z [err]      )
+2026-07-18T05:58:44.694642595Z [err]  FileNotFoundError: [Errno 2] No such file or directory: '/app/backend/../data/zomato.csv'
+2026-07-18T05:58:44.694644855Z [err]  
+2026-07-18T05:58:44.694646895Z [err]  ERROR:    Application startup failed. Exiting.
+2026-07-18T05:58:46.415872584Z [err]      async with original_context(app) as maybe_original_state:
+2026-07-18T05:58:46.415878144Z [err]                 ~~~~~~~~~~~~~~~~^^^^^
+2026-07-18T05:58:46.415882154Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 258, in __aenter__
+2026-07-18T05:58:46.415885014Z [err]      await self._router._startup()
+2026-07-18T05:58:46.415888084Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 6326, in _startup
+2026-07-18T05:58:46.415891514Z [err]      await handler()
+2026-07-18T05:58:46.415894484Z [err]    File "/app/backend/main.py", line 26, in startup_event
+2026-07-18T05:58:46.415900384Z [err]  INFO:     Started server process [1]
+2026-07-18T05:58:46.415902945Z [err]  INFO:     Waiting for application startup.
+2026-07-18T05:58:46.415905365Z [err]  INFO:backend.main:Initializing application... Preloading dataset...
+2026-07-18T05:58:46.415907765Z [err]  INFO:backend.services.data_loader:Loading dataset from /app/backend/../data/zomato.csv...
+2026-07-18T05:58:46.415909925Z [err]  ERROR:backend.services.data_loader:FATAL: zomato.csv not found at /app/backend/../data/zomato.csv
+2026-07-18T05:58:46.415912505Z [err]  ERROR:    Traceback (most recent call last):
+2026-07-18T05:58:46.415915405Z [err]    File "/app/.venv/lib/python3.13/site-packages/starlette/routing.py", line 638, in lifespan
+2026-07-18T05:58:46.415918345Z [err]      async with self.lifespan_context(app) as maybe_state:
+2026-07-18T05:58:46.415920795Z [err]                 ~~~~~~~~~~~~~~~~~~~~~^^^^^
+2026-07-18T05:58:46.415922885Z [err]    File "/mise/installs/python/3.13.14/lib/python3.13/contextlib.py", line 214, in __aenter__
+2026-07-18T05:58:46.415925195Z [err]      return await anext(self.gen)
+2026-07-18T05:58:46.415928184Z [err]             ^^^^^^^^^^^^^^^^^^^^^
+2026-07-18T05:58:46.415930674Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 233, in merged_lifespan
+2026-07-18T05:58:46.416666935Z [err]          storage_options=self.options.get("storage_options", None),
+2026-07-18T05:58:46.416669945Z [err]          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-18T05:58:46.416672905Z [err]      )
+2026-07-18T05:58:46.416677425Z [err]      ^
+2026-07-18T05:58:46.416680315Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/common.py", line 930, in get_handle
+2026-07-18T05:58:46.416712645Z [err]      load_and_clean_data()
+2026-07-18T05:58:46.416725194Z [err]                     ~~~~~~~~~~^
+2026-07-18T05:58:46.416734684Z [err]      ~~~~~~~~~~~~~~~~~~~^^
+2026-07-18T05:58:46.416741854Z [err]          f,
+2026-07-18T05:58:46.416743004Z [err]    File "/app/backend/services/data_loader.py", line 20, in load_and_clean_data
+2026-07-18T05:58:46.416748964Z [err]      df = pd.read_csv(DATA_PATH)
+2026-07-18T05:58:46.416752184Z [err]          ^^
+2026-07-18T05:58:46.416759454Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 873, in read_csv
+2026-07-18T05:58:46.416759904Z [err]      ...<6 lines>...
+2026-07-18T05:58:46.416765804Z [err]      return _read(filepath_or_buffer, kwds)
+2026-07-18T05:58:46.416770224Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 300, in _read
+2026-07-18T05:58:46.416774154Z [err]      parser = TextFileReader(filepath_or_buffer, **kwds)
+2026-07-18T05:58:46.416778394Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1645, in __init__
+2026-07-18T05:58:46.416781934Z [err]      self._engine = self._make_engine(f, self.engine)
+2026-07-18T05:58:46.416785424Z [err]                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+2026-07-18T05:58:46.416789713Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1904, in _make_engine
+2026-07-18T05:58:46.416793283Z [err]      self.handles = get_handle(
+2026-07-18T05:58:46.417459705Z [err]      handle = open(
+2026-07-18T05:58:46.417462665Z [err]          handle,
+2026-07-18T05:58:46.417465245Z [err]      ...<3 lines>...
+2026-07-18T05:58:46.417467695Z [err]          newline="",
+2026-07-18T05:58:46.417470335Z [err]      )
+2026-07-18T05:58:46.417473275Z [err]  FileNotFoundError: [Errno 2] No such file or directory: '/app/backend/../data/zomato.csv'
+2026-07-18T05:58:46.417476415Z [err]  
+2026-07-18T05:58:46.417479225Z [err]  ERROR:    Application startup failed. Exiting.
+2026-07-18T05:58:48.091395718Z [err]  INFO:     Started server process [1]
+2026-07-18T05:58:48.091399368Z [err]  INFO:     Waiting for application startup.
+2026-07-18T05:58:48.091403608Z [err]  INFO:backend.main:Initializing application... Preloading dataset...
+2026-07-18T05:58:48.091406688Z [err]  INFO:backend.services.data_loader:Loading dataset from /app/backend/../data/zomato.csv...
+2026-07-18T05:58:48.091410358Z [err]  ERROR:backend.services.data_loader:FATAL: zomato.csv not found at /app/backend/../data/zomato.csv
+2026-07-18T05:58:48.091413958Z [err]  ERROR:    Traceback (most recent call last):
+2026-07-18T05:58:48.091417038Z [err]    File "/app/.venv/lib/python3.13/site-packages/starlette/routing.py", line 638, in lifespan
+2026-07-18T05:58:48.091420148Z [err]      async with self.lifespan_context(app) as maybe_state:
+2026-07-18T05:58:48.091424138Z [err]                 ~~~~~~~~~~~~~~~~~~~~~^^^^^
+2026-07-18T05:58:48.091428908Z [err]    File "/mise/installs/python/3.13.14/lib/python3.13/contextlib.py", line 214, in __aenter__
+2026-07-18T05:58:48.091432088Z [err]      return await anext(self.gen)
+2026-07-18T05:58:48.091435478Z [err]             ^^^^^^^^^^^^^^^^^^^^^
+2026-07-18T05:58:48.091438717Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 233, in merged_lifespan
+2026-07-18T05:58:48.091442227Z [err]      async with original_context(app) as maybe_original_state:
+2026-07-18T05:58:48.091446297Z [err]                 ~~~~~~~~~~~~~~~~^^^^^
+2026-07-18T05:58:48.091449897Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 258, in __aenter__
+2026-07-18T05:58:48.091454237Z [err]      await self._router._startup()
+2026-07-18T05:58:48.091457397Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 6326, in _startup
+2026-07-18T05:58:48.091461307Z [err]      await handler()
+2026-07-18T05:58:48.091464577Z [err]    File "/app/backend/main.py", line 26, in startup_event
+2026-07-18T05:58:48.092668392Z [err]      load_and_clean_data()
+2026-07-18T05:58:48.092675042Z [err]      ~~~~~~~~~~~~~~~~~~~^^
+2026-07-18T05:58:48.092679342Z [err]    File "/app/backend/services/data_loader.py", line 20, in load_and_clean_data
+2026-07-18T05:58:48.092684072Z [err]      df = pd.read_csv(DATA_PATH)
+2026-07-18T05:58:48.092688862Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 873, in read_csv
+2026-07-18T05:58:48.092694652Z [err]      return _read(filepath_or_buffer, kwds)
+2026-07-18T05:58:48.092699452Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 300, in _read
+2026-07-18T05:58:48.092704412Z [err]      parser = TextFileReader(filepath_or_buffer, **kwds)
+2026-07-18T05:58:48.092708552Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1645, in __init__
+2026-07-18T05:58:48.092713182Z [err]      self._engine = self._make_engine(f, self.engine)
+2026-07-18T05:58:48.092722532Z [err]                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+2026-07-18T05:58:48.092729652Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1904, in _make_engine
+2026-07-18T05:58:48.092734032Z [err]      self.handles = get_handle(
+2026-07-18T05:58:48.092738422Z [err]                     ~~~~~~~~~~^
+2026-07-18T05:58:48.092743561Z [err]          f,
+2026-07-18T05:58:48.092747631Z [err]          ^^
+2026-07-18T05:58:48.092752031Z [err]      ...<6 lines>...
+2026-07-18T05:58:48.092756331Z [err]          storage_options=self.options.get("storage_options", None),
+2026-07-18T05:58:48.092761241Z [err]          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-18T05:58:48.092766471Z [err]      )
+2026-07-18T05:58:48.092771191Z [err]      ^
+2026-07-18T05:58:48.092775871Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/common.py", line 930, in get_handle
+2026-07-18T05:58:48.096214608Z [err]      handle = open(
+2026-07-18T05:58:48.096222008Z [err]          handle,
+2026-07-18T05:58:48.096226558Z [err]      ...<3 lines>...
+2026-07-18T05:58:48.096230248Z [err]          newline="",
+2026-07-18T05:58:48.096234628Z [err]      )
+2026-07-18T05:58:48.096238588Z [err]  FileNotFoundError: [Errno 2] No such file or directory: '/app/backend/../data/zomato.csv'
+2026-07-18T05:58:48.096243068Z [err]  
+2026-07-18T05:58:48.096246518Z [err]  ERROR:    Application startup failed. Exiting.
+2026-07-18T05:58:49.841506852Z [err]             ^^^^^^^^^^^^^^^^^^^^^
+2026-07-18T05:58:49.841511752Z [err]  INFO:     Started server process [1]
+2026-07-18T05:58:49.841516951Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 233, in merged_lifespan
+2026-07-18T05:58:49.841523971Z [err]  INFO:     Waiting for application startup.
+2026-07-18T05:58:49.841524111Z [err]      async with original_context(app) as maybe_original_state:
+2026-07-18T05:58:49.841532801Z [err]                 ~~~~~~~~~~~~~~~~^^^^^
+2026-07-18T05:58:49.841535471Z [err]  INFO:backend.main:Initializing application... Preloading dataset...
+2026-07-18T05:58:49.841539481Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 258, in __aenter__
+2026-07-18T05:58:49.841546551Z [err]  INFO:backend.services.data_loader:Loading dataset from /app/backend/../data/zomato.csv...
+2026-07-18T05:58:49.841548891Z [err]      await self._router._startup()
+2026-07-18T05:58:49.841555401Z [err]  ERROR:backend.services.data_loader:FATAL: zomato.csv not found at /app/backend/../data/zomato.csv
+2026-07-18T05:58:49.841556541Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 6326, in _startup
+2026-07-18T05:58:49.841565171Z [err]      await handler()
+2026-07-18T05:58:49.841565811Z [err]  ERROR:    Traceback (most recent call last):
+2026-07-18T05:58:49.841572551Z [err]    File "/app/.venv/lib/python3.13/site-packages/starlette/routing.py", line 638, in lifespan
+2026-07-18T05:58:49.841577201Z [err]      async with self.lifespan_context(app) as maybe_state:
+2026-07-18T05:58:49.841581591Z [err]                 ~~~~~~~~~~~~~~~~~~~~~^^^^^
+2026-07-18T05:58:49.841586041Z [err]    File "/mise/installs/python/3.13.14/lib/python3.13/contextlib.py", line 214, in __aenter__
+2026-07-18T05:58:49.841591000Z [err]      return await anext(self.gen)
+2026-07-18T05:58:49.841600540Z [err]    File "/app/backend/main.py", line 26, in startup_event
+2026-07-18T05:58:49.842876755Z [err]      load_and_clean_data()
+2026-07-18T05:58:49.842880445Z [err]      ~~~~~~~~~~~~~~~~~~~^^
+2026-07-18T05:58:49.842884144Z [err]    File "/app/backend/services/data_loader.py", line 20, in load_and_clean_data
+2026-07-18T05:58:49.842887744Z [err]      df = pd.read_csv(DATA_PATH)
+2026-07-18T05:58:49.842891794Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1904, in _make_engine
+2026-07-18T05:58:49.842891884Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 873, in read_csv
+2026-07-18T05:58:49.842896764Z [err]      return _read(filepath_or_buffer, kwds)
+2026-07-18T05:58:49.842897814Z [err]      self.handles = get_handle(
+2026-07-18T05:58:49.842900654Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 300, in _read
+2026-07-18T05:58:49.842902364Z [err]                     ~~~~~~~~~~^
+2026-07-18T05:58:49.842904574Z [err]      parser = TextFileReader(filepath_or_buffer, **kwds)
+2026-07-18T05:58:49.842906794Z [err]          f,
+2026-07-18T05:58:49.842910774Z [err]          ^^
+2026-07-18T05:58:49.842914954Z [err]      ...<6 lines>...
+2026-07-18T05:58:49.842916054Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1645, in __init__
+2026-07-18T05:58:49.842919084Z [err]          storage_options=self.options.get("storage_options", None),
+2026-07-18T05:58:49.842920414Z [err]      self._engine = self._make_engine(f, self.engine)
+2026-07-18T05:58:49.842923534Z [err]          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-18T05:58:49.842924174Z [err]                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+2026-07-18T05:58:49.842928444Z [err]      )
+2026-07-18T05:58:49.842932504Z [err]      ^
+2026-07-18T05:58:49.842936194Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/common.py", line 930, in get_handle
+2026-07-18T05:58:49.843780963Z [err]      handle = open(
+2026-07-18T05:58:49.843788943Z [err]          handle,
+2026-07-18T05:58:49.843792793Z [err]      ...<3 lines>...
+2026-07-18T05:58:49.843796573Z [err]          newline="",
+2026-07-18T05:58:49.843813054Z [err]      )
+2026-07-18T05:58:49.843816724Z [err]  FileNotFoundError: [Errno 2] No such file or directory: '/app/backend/../data/zomato.csv'
+2026-07-18T05:58:49.843820524Z [err]  
+2026-07-18T05:58:49.843824143Z [err]  ERROR:    Application startup failed. Exiting.
+2026-07-18T05:58:51.664894532Z [err]  INFO:     Started server process [1]
+2026-07-18T05:58:51.664898402Z [err]  INFO:     Waiting for application startup.
+2026-07-18T05:58:51.664902142Z [err]  INFO:backend.main:Initializing application... Preloading dataset...
+2026-07-18T05:58:51.664905492Z [err]  INFO:backend.services.data_loader:Loading dataset from /app/backend/../data/zomato.csv...
+2026-07-18T05:58:51.664915651Z [err]  ERROR:backend.services.data_loader:FATAL: zomato.csv not found at /app/backend/../data/zomato.csv
+2026-07-18T05:58:51.664919321Z [err]  ERROR:    Traceback (most recent call last):
+2026-07-18T05:58:51.664923061Z [err]    File "/app/.venv/lib/python3.13/site-packages/starlette/routing.py", line 638, in lifespan
+2026-07-18T05:58:51.664926971Z [err]      async with self.lifespan_context(app) as maybe_state:
+2026-07-18T05:58:51.664930351Z [err]                 ~~~~~~~~~~~~~~~~~~~~~^^^^^
+2026-07-18T05:58:51.664933981Z [err]    File "/mise/installs/python/3.13.14/lib/python3.13/contextlib.py", line 214, in __aenter__
+2026-07-18T05:58:51.664937931Z [err]      return await anext(self.gen)
+2026-07-18T05:58:51.664941761Z [err]             ^^^^^^^^^^^^^^^^^^^^^
+2026-07-18T05:58:51.664945611Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 233, in merged_lifespan
+2026-07-18T05:58:51.664948961Z [err]      async with original_context(app) as maybe_original_state:
+2026-07-18T05:58:51.664952371Z [err]                 ~~~~~~~~~~~~~~~~^^^^^
+2026-07-18T05:58:51.664955821Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 258, in __aenter__
+2026-07-18T05:58:51.664959421Z [err]      await self._router._startup()
+2026-07-18T05:58:51.664963771Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 6326, in _startup
+2026-07-18T05:58:51.664966931Z [err]      await handler()
+2026-07-18T05:58:51.664970571Z [err]    File "/app/backend/main.py", line 26, in startup_event
+2026-07-18T05:58:51.666560591Z [err]      self.handles = get_handle(
+2026-07-18T05:58:51.666561551Z [err]    File "/app/backend/services/data_loader.py", line 20, in load_and_clean_data
+2026-07-18T05:58:51.666566851Z [err]          storage_options=self.options.get("storage_options", None),
+2026-07-18T05:58:51.666569821Z [err]                     ~~~~~~~~~~^
+2026-07-18T05:58:51.666571121Z [err]      df = pd.read_csv(DATA_PATH)
+2026-07-18T05:58:51.666576350Z [err]          f,
+2026-07-18T05:58:51.666577510Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 873, in read_csv
+2026-07-18T05:58:51.666580190Z [err]          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-18T05:58:51.666582900Z [err]          ^^
+2026-07-18T05:58:51.666584530Z [err]      return _read(filepath_or_buffer, kwds)
+2026-07-18T05:58:51.666588110Z [err]      ...<6 lines>...
+2026-07-18T05:58:51.666591040Z [err]      )
+2026-07-18T05:58:51.666591240Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 300, in _read
+2026-07-18T05:58:51.666599040Z [err]      ^
+2026-07-18T05:58:51.666599300Z [err]      parser = TextFileReader(filepath_or_buffer, **kwds)
+2026-07-18T05:58:51.666599560Z [err]      load_and_clean_data()
+2026-07-18T05:58:51.666605350Z [err]      ~~~~~~~~~~~~~~~~~~~^^
+2026-07-18T05:58:51.666621330Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1645, in __init__
+2026-07-18T05:58:51.666624440Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/common.py", line 930, in get_handle
+2026-07-18T05:58:51.666624570Z [err]      self._engine = self._make_engine(f, self.engine)
+2026-07-18T05:58:51.666629240Z [err]                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+2026-07-18T05:58:51.666632250Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1904, in _make_engine
+2026-07-18T05:58:51.668315609Z [err]      handle = open(
+2026-07-18T05:58:51.668318259Z [err]          handle,
+2026-07-18T05:58:51.668320829Z [err]      ...<3 lines>...
+2026-07-18T05:58:51.668323419Z [err]          newline="",
+2026-07-18T05:58:51.668325899Z [err]      )
+2026-07-18T05:58:51.668328649Z [err]  FileNotFoundError: [Errno 2] No such file or directory: '/app/backend/../data/zomato.csv'
+2026-07-18T05:58:51.668331099Z [err]  
+2026-07-18T05:58:51.668333349Z [err]  ERROR:    Application startup failed. Exiting.
+2026-07-18T05:58:53.378490145Z [err]  INFO:     Started server process [1]
+2026-07-18T05:58:53.378502005Z [err]  INFO:     Waiting for application startup.
+2026-07-18T05:58:53.378511935Z [err]  INFO:backend.main:Initializing application... Preloading dataset...
+2026-07-18T05:58:53.378516615Z [err]  INFO:backend.services.data_loader:Loading dataset from /app/backend/../data/zomato.csv...
+2026-07-18T05:58:53.378520855Z [err]  ERROR:backend.services.data_loader:FATAL: zomato.csv not found at /app/backend/../data/zomato.csv
+2026-07-18T05:58:53.378525975Z [err]  ERROR:    Traceback (most recent call last):
+2026-07-18T05:58:53.378530325Z [err]    File "/app/.venv/lib/python3.13/site-packages/starlette/routing.py", line 638, in lifespan
+2026-07-18T05:58:53.378534514Z [err]      async with self.lifespan_context(app) as maybe_state:
+2026-07-18T05:58:53.378538534Z [err]                 ~~~~~~~~~~~~~~~~~~~~~^^^^^
+2026-07-18T05:58:53.378542894Z [err]    File "/mise/installs/python/3.13.14/lib/python3.13/contextlib.py", line 214, in __aenter__
+2026-07-18T05:58:53.378545904Z [err]      return await anext(self.gen)
+2026-07-18T05:58:53.378549394Z [err]             ^^^^^^^^^^^^^^^^^^^^^
+2026-07-18T05:58:53.378553044Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 233, in merged_lifespan
+2026-07-18T05:58:53.378556334Z [err]      async with original_context(app) as maybe_original_state:
+2026-07-18T05:58:53.378559824Z [err]                 ~~~~~~~~~~~~~~~~^^^^^
+2026-07-18T05:58:53.378562954Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 258, in __aenter__
+2026-07-18T05:58:53.378566344Z [err]      await self._router._startup()
+2026-07-18T05:58:53.378570514Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 6326, in _startup
+2026-07-18T05:58:53.378574394Z [err]      await handler()
+2026-07-18T05:58:53.378578324Z [err]    File "/app/backend/main.py", line 26, in startup_event
+2026-07-18T05:58:53.379622501Z [err]      load_and_clean_data()
+2026-07-18T05:58:53.379635091Z [err]      ~~~~~~~~~~~~~~~~~~~^^
+2026-07-18T05:58:53.379640141Z [err]    File "/app/backend/services/data_loader.py", line 20, in load_and_clean_data
+2026-07-18T05:58:53.379644011Z [err]      df = pd.read_csv(DATA_PATH)
+2026-07-18T05:58:53.379648081Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 873, in read_csv
+2026-07-18T05:58:53.379653371Z [err]      return _read(filepath_or_buffer, kwds)
+2026-07-18T05:58:53.379657281Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 300, in _read
+2026-07-18T05:58:53.379660721Z [err]      parser = TextFileReader(filepath_or_buffer, **kwds)
+2026-07-18T05:58:53.379664111Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1645, in __init__
+2026-07-18T05:58:53.379668151Z [err]      self._engine = self._make_engine(f, self.engine)
+2026-07-18T05:58:53.379671611Z [err]                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+2026-07-18T05:58:53.379676691Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1904, in _make_engine
+2026-07-18T05:58:53.379680441Z [err]      self.handles = get_handle(
+2026-07-18T05:58:53.379683851Z [err]                     ~~~~~~~~~~^
+2026-07-18T05:58:53.379686921Z [err]          f,
+2026-07-18T05:58:53.379689960Z [err]          ^^
+2026-07-18T05:58:53.379693110Z [err]      ...<6 lines>...
+2026-07-18T05:58:53.379700620Z [err]          storage_options=self.options.get("storage_options", None),
+2026-07-18T05:58:53.379704620Z [err]          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-18T05:58:53.379707670Z [err]      )
+2026-07-18T05:58:53.379710770Z [err]      ^
+2026-07-18T05:58:53.379714610Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/common.py", line 930, in get_handle
+2026-07-18T05:58:53.380901215Z [err]      handle = open(
+2026-07-18T05:58:53.380908235Z [err]          handle,
+2026-07-18T05:58:53.380915596Z [err]      ...<3 lines>...
+2026-07-18T05:58:53.380919135Z [err]          newline="",
+2026-07-18T05:58:53.380922575Z [err]      )
+2026-07-18T05:58:53.380926275Z [err]  FileNotFoundError: [Errno 2] No such file or directory: '/app/backend/../data/zomato.csv'
+2026-07-18T05:58:53.380930595Z [err]  
+2026-07-18T05:58:53.380935755Z [err]  ERROR:    Application startup failed. Exiting.
+2026-07-18T05:58:55.150772864Z [err]  INFO:     Started server process [1]
+2026-07-18T05:58:55.150783664Z [err]  INFO:     Waiting for application startup.
+2026-07-18T05:58:55.150788684Z [err]  INFO:backend.main:Initializing application... Preloading dataset...
+2026-07-18T05:58:55.150792354Z [err]  INFO:backend.services.data_loader:Loading dataset from /app/backend/../data/zomato.csv...
+2026-07-18T05:58:55.150796214Z [err]  ERROR:backend.services.data_loader:FATAL: zomato.csv not found at /app/backend/../data/zomato.csv
+2026-07-18T05:58:55.155655584Z [err]  ERROR:    Traceback (most recent call last):
+2026-07-18T05:58:55.155663674Z [err]    File "/app/.venv/lib/python3.13/site-packages/starlette/routing.py", line 638, in lifespan
+2026-07-18T05:58:55.155667784Z [err]      async with self.lifespan_context(app) as maybe_state:
+2026-07-18T05:58:55.155671534Z [err]                 ~~~~~~~~~~~~~~~~~~~~~^^^^^
+2026-07-18T05:58:55.155675184Z [err]    File "/mise/installs/python/3.13.14/lib/python3.13/contextlib.py", line 214, in __aenter__
+2026-07-18T05:58:55.155681434Z [err]      return await anext(self.gen)
+2026-07-18T05:58:55.155685214Z [err]             ^^^^^^^^^^^^^^^^^^^^^
+2026-07-18T05:58:55.155688914Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 233, in merged_lifespan
+2026-07-18T05:58:55.155692674Z [err]      async with original_context(app) as maybe_original_state:
+2026-07-18T05:58:55.155696534Z [err]                 ~~~~~~~~~~~~~~~~^^^^^
+2026-07-18T05:58:55.155700044Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 258, in __aenter__
+2026-07-18T05:58:55.155703424Z [err]      await self._router._startup()
+2026-07-18T05:58:55.155707264Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 6326, in _startup
+2026-07-18T05:58:55.155711684Z [err]      await handler()
+2026-07-18T05:58:55.155716654Z [err]    File "/app/backend/main.py", line 26, in startup_event
+2026-07-18T05:58:55.155724094Z [err]      load_and_clean_data()
+2026-07-18T05:58:55.155727593Z [err]      ~~~~~~~~~~~~~~~~~~~^^
+2026-07-18T05:58:55.155731593Z [err]    File "/app/backend/services/data_loader.py", line 20, in load_and_clean_data
+2026-07-18T05:58:55.155735563Z [err]      df = pd.read_csv(DATA_PATH)
+2026-07-18T05:58:55.155739163Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 873, in read_csv
+2026-07-18T05:58:55.155742723Z [err]      return _read(filepath_or_buffer, kwds)
+2026-07-18T05:58:55.156701571Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 300, in _read
+2026-07-18T05:58:55.156701641Z [err]          newline="",
+2026-07-18T05:58:55.156709031Z [err]      parser = TextFileReader(filepath_or_buffer, **kwds)
+2026-07-18T05:58:55.156709991Z [err]      )
+2026-07-18T05:58:55.156716121Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1645, in __init__
+2026-07-18T05:58:55.156716421Z [err]  FileNotFoundError: [Errno 2] No such file or directory: '/app/backend/../data/zomato.csv'
+2026-07-18T05:58:55.156723341Z [err]      self._engine = self._make_engine(f, self.engine)
+2026-07-18T05:58:55.156724241Z [err]  
+2026-07-18T05:58:55.156729381Z [err]                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+2026-07-18T05:58:55.156733911Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1904, in _make_engine
+2026-07-18T05:58:55.156736731Z [err]  ERROR:    Application startup failed. Exiting.
+2026-07-18T05:58:55.156739790Z [err]      self.handles = get_handle(
+2026-07-18T05:58:55.156743540Z [err]                     ~~~~~~~~~~^
+2026-07-18T05:58:55.156746710Z [err]          f,
+2026-07-18T05:58:55.156750090Z [err]          ^^
+2026-07-18T05:58:55.156753150Z [err]      ...<6 lines>...
+2026-07-18T05:58:55.156756370Z [err]          storage_options=self.options.get("storage_options", None),
+2026-07-18T05:58:55.156759640Z [err]          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-18T05:58:55.156763110Z [err]      )
+2026-07-18T05:58:55.156765920Z [err]      ^
+2026-07-18T05:58:55.156768480Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/common.py", line 930, in get_handle
+2026-07-18T05:58:55.156773150Z [err]      handle = open(
+2026-07-18T05:58:55.156776290Z [err]          handle,
+2026-07-18T05:58:55.156779400Z [err]      ...<3 lines>...
+2026-07-18T05:58:56.992504137Z [err]  INFO:     Started server process [1]
+2026-07-18T05:58:56.992508627Z [err]  INFO:     Waiting for application startup.
+2026-07-18T05:58:56.992512917Z [err]  INFO:backend.main:Initializing application... Preloading dataset...
+2026-07-18T05:58:56.992520087Z [err]  INFO:backend.services.data_loader:Loading dataset from /app/backend/../data/zomato.csv...
+2026-07-18T05:58:56.992524017Z [err]  ERROR:backend.services.data_loader:FATAL: zomato.csv not found at /app/backend/../data/zomato.csv
+2026-07-18T05:58:56.992527487Z [err]  ERROR:    Traceback (most recent call last):
+2026-07-18T05:58:56.992530927Z [err]    File "/app/.venv/lib/python3.13/site-packages/starlette/routing.py", line 638, in lifespan
+2026-07-18T05:58:56.992535157Z [err]      async with self.lifespan_context(app) as maybe_state:
+2026-07-18T05:58:56.992539287Z [err]                 ~~~~~~~~~~~~~~~~~~~~~^^^^^
+2026-07-18T05:58:56.992543277Z [err]    File "/mise/installs/python/3.13.14/lib/python3.13/contextlib.py", line 214, in __aenter__
+2026-07-18T05:58:56.992546737Z [err]      return await anext(self.gen)
+2026-07-18T05:58:56.992550486Z [err]             ^^^^^^^^^^^^^^^^^^^^^
+2026-07-18T05:58:56.992554036Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 233, in merged_lifespan
+2026-07-18T05:58:56.992557836Z [err]      async with original_context(app) as maybe_original_state:
+2026-07-18T05:58:56.992561756Z [err]                 ~~~~~~~~~~~~~~~~^^^^^
+2026-07-18T05:58:56.992565476Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 258, in __aenter__
+2026-07-18T05:58:56.992569166Z [err]      await self._router._startup()
+2026-07-18T05:58:56.992572756Z [err]    File "/app/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 6326, in _startup
+2026-07-18T05:58:56.992576166Z [err]      await handler()
+2026-07-18T05:58:56.992579646Z [err]    File "/app/backend/main.py", line 26, in startup_event
+2026-07-18T05:58:56.992972822Z [err]      load_and_clean_data()
+2026-07-18T05:58:56.992984831Z [err]      ~~~~~~~~~~~~~~~~~~~^^
+2026-07-18T05:58:56.992990771Z [err]    File "/app/backend/services/data_loader.py", line 20, in load_and_clean_data
+2026-07-18T05:58:56.992996601Z [err]      df = pd.read_csv(DATA_PATH)
+2026-07-18T05:58:56.993001611Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 873, in read_csv
+2026-07-18T05:58:56.993007381Z [err]      return _read(filepath_or_buffer, kwds)
+2026-07-18T05:58:56.993013111Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 300, in _read
+2026-07-18T05:58:56.993018041Z [err]      parser = TextFileReader(filepath_or_buffer, **kwds)
+2026-07-18T05:58:56.993022661Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1645, in __init__
+2026-07-18T05:58:56.993028071Z [err]      self._engine = self._make_engine(f, self.engine)
+2026-07-18T05:58:56.993033141Z [err]                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+2026-07-18T05:58:56.993038131Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1904, in _make_engine
+2026-07-18T05:58:56.993042891Z [err]      self.handles = get_handle(
+2026-07-18T05:58:56.993048041Z [err]                     ~~~~~~~~~~^
+2026-07-18T05:58:56.993053881Z [err]          f,
+2026-07-18T05:58:56.993059500Z [err]          ^^
+2026-07-18T05:58:56.993064630Z [err]      ...<6 lines>...
+2026-07-18T05:58:56.993069500Z [err]          storage_options=self.options.get("storage_options", None),
+2026-07-18T05:58:56.993074340Z [err]          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-18T05:58:56.993079160Z [err]      )
+2026-07-18T05:58:56.993084110Z [err]      ^
+2026-07-18T05:58:56.993088770Z [err]    File "/app/.venv/lib/python3.13/site-packages/pandas/io/common.py", line 930, in get_handle
+2026-07-18T05:58:56.993541095Z [err]      handle = open(
+2026-07-18T05:58:56.993545195Z [err]          handle,
+2026-07-18T05:58:56.993548025Z [err]      ...<3 lines>...
+2026-07-18T05:58:56.993550455Z [err]          newline="",
+2026-07-18T05:58:56.993554425Z [err]      )
+2026-07-18T05:58:56.993556805Z [err]  FileNotFoundError: [Errno 2] No such file or directory: '/app/backend/../data/zomato.csv'
+2026-07-18T05:58:56.993559265Z [err]  
+2026-07-18T05:58:56.993562445Z [err]  ERROR:    Application startup failed. Exiting.
