@@ -1,12 +1,24 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Query
 from backend.services.data_loader import get_locations, get_cuisines
 from backend.models.request import RecommendRequest
 from backend.models.response import RecommendResponse
 from backend.services.filter import filter_restaurants
+from backend.services.filter_options import get_available_options
 from backend.services.llm import get_recommendations
 from backend.utils.cache import llm_cache
 
 router = APIRouter(prefix="/api")
+
+@router.get("/filter-options")
+async def api_filter_options(
+    location: str = Query("", description="Currently selected location"),
+    budget: str = Query("", description="Currently selected budget bracket"),
+    cuisine: str = Query("", description="Currently selected cuisine"),
+):
+    """Returns available options for all dropdowns based on current selections."""
+    options = get_available_options(location=location, budget=budget, cuisine=cuisine)
+    return {"success": True, **options}
+
 
 @router.get("/locations")
 async def api_locations():

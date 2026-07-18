@@ -8,46 +8,110 @@ document.addEventListener('DOMContentLoaded', () => {
     const sliderVal = document.getElementById('rating-val');
     const submitBtn = document.getElementById('submit-btn');
 
+    const locSelect = document.getElementById('location');
+    const cuiSelect = document.getElementById('cuisine');
+    const budSelect = document.getElementById('budget');
+    const matchCountEl = document.getElementById('match-count');
+    const matchCountText = document.getElementById('match-count-text');
+
+    // Track in-flight filter requests to avoid race conditions
+    let filterRequestId = 0;
+
     // Update slider value UI
     slider.addEventListener('input', (e) => {
         sliderVal.textContent = parseFloat(e.target.value).toFixed(1) + '+';
     });
-    
-    // Fetch locations and cuisines on load from FastAPI
+
+    // --- Helper: populate a <select> with options, preserving selection if valid ---
+    function populateSelect(selectEl, items, placeholderText, valueKey, labelKey) {
+        const currentValue = selectEl.value;
+        // Remove all options except first placeholder
+        selectEl.innerHTML = '';
+        // Add placeholder
+        const placeholder = document.createElement('option');
+        placeholder.value = '';
+        placeholder.textContent = placeholderText;
+        selectEl.appendChild(placeholder);
+
+        items.forEach(item => {
+            const opt = document.createElement('option');
+            if (typeof item === 'object') {
+                opt.value = item[valueKey || 'value'];
+                opt.textContent = item[labelKey || 'label'];
+            } else {
+                opt.value = item;
+                // Capitalize for display
+                opt.textContent = String(item).split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+            }
+            selectEl.appendChild(opt);
+        });
+
+        // Restore previous selection if still valid
+        const validValues = Array.from(selectEl.options).map(o => o.value);
+        if (validValues.includes(currentValue)) {
+            selectEl.value = currentValue;
+        } else {
+            selectEl.value = '';
+        }
+    }
+
+    // --- Fetch filter options based on current selections ---
+    async function updateFilterOptions() {
+        const reqId = ++filterRequestId;
+        const params = new URLSearchParams();
+        if (locSelect.value) params.set('location', locSelect.value);
+        if (budSelect.value) params.set('budget', budSelect.value);
+        if (cuiSelect.value) params.set('cuisine', cuiSelect.value);
+
+        try {
+            const res = await fetch(`/api/filter-options?${params.toString()}`);
+            // Discard stale responses
+            if (reqId !== filterRequestId) return;
+
+            if (res.ok) {
+                const data = await res.json();
+
+                populateSelect(locSelect, data.locations, 'Select location...');
+                populateSelect(cuiSelect, data.cuisines, 'Select cuisine...');
+                populateSelect(budSelect, data.budgets, 'Select budget...', 'value', 'label');
+
+                // Update match count badge
+                if (locSelect.value || cuiSelect.value || budSelect.value) {
+                    matchCountText.textContent = `${data.match_count} restaurants match`;
+                    matchCountEl.classList.remove('hidden');
+                } else {
+                    matchCountEl.classList.add('hidden');
+                }
+            }
+        } catch (e) {
+            console.error('Failed to fetch filter options', e);
+        }
+    }
+
+    // --- Initial load: populate all dropdowns with full data ---
     async function initData() {
         try {
-            const locRes = await fetch('/api/locations');
-            if (locRes.ok) {
-                const data = await locRes.json();
-                const locSelect = document.getElementById('location');
-                data.locations.forEach(loc => {
-                    const opt = document.createElement('option');
-                    opt.value = loc;
-                    opt.textContent = loc;
-                    locSelect.appendChild(opt);
-                });
-            }
-            
-            const cuiRes = await fetch('/api/cuisines');
-            if (cuiRes.ok) {
-                const data = await cuiRes.json();
-                const cuiSelect = document.getElementById('cuisine');
-                data.cuisines.forEach(cui => {
-                    const opt = document.createElement('option');
-                    opt.value = cui;
-                    // Capitalize for UI
-                    opt.textContent = cui.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-                    cuiSelect.appendChild(opt);
-                });
+            const res = await fetch('/api/filter-options');
+            if (res.ok) {
+                const data = await res.json();
+                populateSelect(locSelect, data.locations, 'Select location...');
+                populateSelect(cuiSelect, data.cuisines, 'Select cuisine...');
+                populateSelect(budSelect, data.budgets, 'Select budget...', 'value', 'label');
             }
         } catch (e) {
             console.error("Failed to load init data", e);
             showToast('Error connecting to backend API. Ensure server is running.', true);
         }
     }
-    
+
     initData();
 
+    // --- Cascading filter listeners ---
+    locSelect.addEventListener('change', updateFilterOptions);
+    cuiSelect.addEventListener('change', updateFilterOptions);
+    budSelect.addEventListener('change', updateFilterOptions);
+
+    // --- Form submission ---
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         
@@ -58,9 +122,9 @@ document.addEventListener('DOMContentLoaded', () => {
         loadingState.classList.remove('hidden');
         
         const payload = {
-            location: document.getElementById('location').value,
-            cuisine: document.getElementById('cuisine').value,
-            budget: document.getElementById('budget').value,
+            location: locSelect.value,
+            cuisine: cuiSelect.value,
+            budget: budSelect.value,
             min_rating: parseFloat(slider.value),
             additional_preferences: document.getElementById('additional-preferences').value
         };

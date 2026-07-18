@@ -90,21 +90,22 @@
                     <div class="space-y-2">
                         <label class="font-lexend text-sm font-semibold text-on-surface-variant">Location</label>
                         <select id="location" class="zomato-input rounded-xl px-4 py-3 w-full text-sm appearance-none" required>
+                            <option value="">Select location...</option>
                             <!-- Populated dynamically -->
                         </select>
                     </div>
                     <div class="space-y-2">
                         <label class="font-lexend text-sm font-semibold text-on-surface-variant">Cuisine</label>
                         <select id="cuisine" class="zomato-input rounded-xl px-4 py-3 w-full text-sm appearance-none" required>
+                            <option value="">Select cuisine...</option>
                             <!-- Populated dynamically -->
                         </select>
                     </div>
                     <div class="space-y-2">
                         <label class="font-lexend text-sm font-semibold text-on-surface-variant">Budget Bracket</label>
                         <select id="budget" class="zomato-input rounded-xl px-4 py-3 w-full text-sm appearance-none" required>
-                            <option value="low">Low (<= 500)</option>
-                            <option value="medium">Medium (<= 1500)</option>
-                            <option value="high">High (> 1500)</option>
+                            <option value="">Select budget...</option>
+                            <!-- Populated dynamically -->
                         </select>
                     </div>
                 </div>
@@ -124,11 +125,15 @@
                     <textarea id="additional-preferences" class="zomato-input rounded-xl px-4 py-4 w-full text-sm resize-none min-h-[100px]" placeholder="e.g. 'A cozy outdoor cafe for brunch with pets, must have great coffee and sourdough toast'"></textarea>
                 </div>
 
-                <div class="flex justify-center">
+                <div class="flex flex-col items-center gap-3">
                     <button id="submit-btn" class="primary-btn px-12 py-4 rounded-xl font-lexend font-semibold text-lg flex items-center gap-3 shadow-lg shadow-primary/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed" type="submit">
                         <span class="material-symbols-outlined">auto_awesome</span>
                         Generate Recommendations
                     </button>
+                    <span id="match-count" class="text-xs text-text-secondary font-medium hidden">
+                        <span class="material-symbols-outlined text-[14px] align-middle">restaurant</span>
+                        <span id="match-count-text"></span>
+                    </span>
                 </div>
             </form>
         </div>
