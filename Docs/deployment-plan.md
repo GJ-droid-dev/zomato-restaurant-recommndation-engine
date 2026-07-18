@@ -25,8 +25,8 @@ This document outlines the step-by-step process to deploy the application into p
 3. **Configure Build & Start Commands**:
    Railway needs to know how to install dependencies, download the dataset (since `zomato.csv` is in `.gitignore`), and start FastAPI.
    Go to the **Settings** tab -> **Deploy**:
-   - **Build Command**: `pip install -r requirements.txt && python download_data.py` *(This ensures the dataset is downloaded before the server starts).*
-   - **Start Command**: `uvicorn backend.main:app --host 0.0.0.0 --port $PORT`
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `python download_data.py && uvicorn backend.main:app --host 0.0.0.0 --port $PORT`
 4. **Deploy**: Railway will automatically build and deploy. 
 5. **Get the URL**: Once deployed, go to the **Settings** tab -> **Environment** -> **Public Networking** and click "Generate Domain". 
    - *Example: `https://zomato-backend-production.up.railway.app`*
