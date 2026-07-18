@@ -28,30 +28,10 @@ def filter_restaurants(location: str, budget: str, cuisine: str, min_rating: flo
     # 4. Rating threshold
     filtered = filtered[filtered['rating'] >= min_rating]
 
-    # Handle edge case: 0 results. Progressively relax constraints if needed.
-    # Note: In a production app, we would explicitly notify the user about relaxed constraints.
+    # Handle edge case: 0 results
     if len(filtered) == 0:
-        logger.warning("0 results with strict filters. Relaxing budget constraint...")
-        # Relax budget
-        filtered = df.copy()
-        if location:
-            filtered = filtered[filtered['location'].str.contains(location, case=False, na=False)]
-        if cuisine:
-            filtered = filtered[filtered['cuisines'].apply(lambda c_list: any(cuisine.lower().strip() in c for c in c_list))]
-        filtered = filtered[filtered['rating'] >= min_rating]
-        
-    if len(filtered) == 0:
-        logger.warning("Still 0 results. Relaxing cuisine constraint...")
-        filtered = df.copy()
-        if location:
-            filtered = filtered[filtered['location'].str.contains(location, case=False, na=False)]
-        filtered = filtered[filtered['rating'] >= min_rating]
-        
-    if len(filtered) == 0:
-         logger.warning("Still 0 results. Returning location + top rated only.")
-         filtered = df.copy()
-         if location:
-             filtered = filtered[filtered['location'].str.contains(location, case=False, na=False)]
+        logger.info("0 results with strict filters. Returning empty.")
+        return filtered
 
     # Sort by rating and votes
     filtered = filtered.sort_values(by=['rating', 'votes'], ascending=[False, False])
