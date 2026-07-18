@@ -1,6 +1,8 @@
+import os
 import pandas as pd
 import numpy as np
 import re
+import urllib.request
 from backend.config import DATA_PATH
 import logging
 
@@ -9,6 +11,34 @@ logger = logging.getLogger(__name__)
 # Module-level cache for the dataset
 _df_cache = None
 
+def _auto_download_dataset(target_path: str):
+    """Downloads the Zomato dataset from HuggingFace if not present locally."""
+    os.makedirs(os.path.dirname(target_path), exist_ok=True)
+    
+    # Try direct parquet download and convert to CSV
+    parquet_url = "https://huggingface.co/datasets/ManikaSaini/zomato-restaurant-recommendation/resolve/main/data/train-00000-of-00001.parquet"
+    try:
+        logger.info(f"Downloading parquet from {parquet_url}...")
+        tmp_path = target_path + ".parquet"
+        urllib.request.urlretrieve(parquet_url, tmp_path)
+        df = pd.read_parquet(tmp_path)
+        df.to_csv(target_path, index=False)
+        os.remove(tmp_path)
+        logger.info(f"Dataset downloaded and saved to {target_path} ({len(df)} rows)")
+        return
+    except Exception as e:
+        logger.warning(f"Parquet download failed: {e}. Trying datasets library...")
+    
+    # Fallback: use datasets library
+    try:
+        from datasets import load_dataset
+        ds = load_dataset("ManikaSaini/zomato-restaurant-recommendation")
+        ds["train"].to_csv(target_path, index=False)
+        logger.info(f"Dataset downloaded via datasets library to {target_path}")
+    except Exception as e2:
+        logger.error(f"All download methods failed: {e2}")
+        raise RuntimeError(f"Could not download dataset: {e2}")
+
 def load_and_clean_data() -> pd.DataFrame:
     """Loads and preprocesses the Zomato dataset."""
     global _df_cache
@@ -16,10 +46,16 @@ def load_and_clean_data() -> pd.DataFrame:
         return _df_cache
 
     logger.info(f"Loading dataset from {DATA_PATH}...")
+    
+    # Auto-download if the CSV doesn't exist (for cloud deployments)
+    if not os.path.exists(DATA_PATH):
+        logger.info(f"Dataset not found at {DATA_PATH}. Auto-downloading...")
+        _auto_download_dataset(DATA_PATH)
+    
     try:
         df = pd.read_csv(DATA_PATH)
     except FileNotFoundError:
-        logger.error(f"FATAL: zomato.csv not found at {DATA_PATH}")
+        logger.error(f"FATAL: zomato.csv not found at {DATA_PATH} even after download attempt.")
         raise
 
     if len(df) == 0:
