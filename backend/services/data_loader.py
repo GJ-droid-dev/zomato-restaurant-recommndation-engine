@@ -53,22 +53,22 @@ def load_and_clean_data() -> pd.DataFrame:
         _auto_download_dataset(DATA_PATH)
     
     try:
-        df = pd.read_csv(DATA_PATH)
+        # 1. Keep only relevant columns
+        cols_to_keep = ['name', 'location', 'cuisines', 'approx_cost(for two people)', 'rate', 'votes']
+        # Use usecols to prevent loading the entire dataset into memory (fixes OOM 'Killed' error)
+        df = pd.read_csv(DATA_PATH, usecols=lambda c: c in cols_to_keep)
     except FileNotFoundError:
         logger.error(f"FATAL: zomato.csv not found at {DATA_PATH} even after download attempt.")
         raise
 
     if len(df) == 0:
         raise ValueError("Dataset is empty.")
-
-    # 1. Keep only relevant columns and rename them
-    cols_to_keep = ['name', 'location', 'cuisines', 'approx_cost(for two people)', 'rate', 'votes']
-    # Check if expected columns exist
+    
+    # Check if all expected columns were found
     missing_cols = [c for c in cols_to_keep if c not in df.columns]
     if missing_cols:
         raise KeyError(f"Missing expected columns in dataset: {missing_cols}")
 
-    df = df[cols_to_keep].copy()
     df.rename(columns={
         'approx_cost(for two people)': 'cost_for_two',
         'rate': 'rating'
