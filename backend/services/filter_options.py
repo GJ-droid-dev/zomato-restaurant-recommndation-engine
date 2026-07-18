@@ -33,6 +33,7 @@ def get_available_options(location: str = "", budget: str = "", cuisine: str = "
         )]
 
     match_count = len(filtered)
+    highest_rating = round(float(filtered['rating'].max()), 1) if not filtered.empty else 0.0
 
     # --- Derive available options from filtered data ---
 
@@ -79,4 +80,5 @@ def get_available_options(location: str = "", budget: str = "", cuisine: str = "
         "cuisines": available_cuisines,
         "budgets": available_budgets,
         "match_count": match_count,
+        "highest_rating": highest_rating,
     }

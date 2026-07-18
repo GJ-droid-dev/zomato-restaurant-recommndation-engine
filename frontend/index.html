@@ -130,10 +130,19 @@
                         <span class="material-symbols-outlined">auto_awesome</span>
                         Generate Recommendations
                     </button>
-                    <span id="match-count" class="text-xs text-text-secondary font-medium hidden">
-                        <span class="material-symbols-outlined text-[14px] align-middle">restaurant</span>
-                        <span id="match-count-text"></span>
-                    </span>
+                    <div id="match-stats" class="hidden w-full max-w-md mx-auto">
+                        <div class="flex justify-center items-center gap-6 bg-surface-container rounded-xl px-6 py-3 border border-white/5">
+                            <span class="flex items-center gap-2 text-sm text-white font-medium">
+                                <span class="material-symbols-outlined text-primary text-base">restaurant</span>
+                                <span id="match-count-text">0</span> restaurants
+                            </span>
+                            <span class="w-px h-4 bg-white/10"></span>
+                            <span class="flex items-center gap-2 text-sm text-white font-medium">
+                                <span class="material-symbols-outlined text-[#fabd00] text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+                                Top rated: <span id="highest-rating-text">0.0</span>
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>

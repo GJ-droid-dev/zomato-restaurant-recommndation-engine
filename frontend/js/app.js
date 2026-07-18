@@ -11,8 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const locSelect = document.getElementById('location');
     const cuiSelect = document.getElementById('cuisine');
     const budSelect = document.getElementById('budget');
-    const matchCountEl = document.getElementById('match-count');
+    const matchStatsEl = document.getElementById('match-stats');
     const matchCountText = document.getElementById('match-count-text');
+    const highestRatingText = document.getElementById('highest-rating-text');
 
     // Track in-flight filter requests to avoid race conditions
     let filterRequestId = 0;
@@ -75,12 +76,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 populateSelect(cuiSelect, data.cuisines, 'Select cuisine...');
                 populateSelect(budSelect, data.budgets, 'Select budget...', 'value', 'label');
 
-                // Update match count badge
+                // Update stats pill
                 if (locSelect.value || cuiSelect.value || budSelect.value) {
-                    matchCountText.textContent = `${data.match_count} restaurants match`;
-                    matchCountEl.classList.remove('hidden');
+                    matchCountText.textContent = data.match_count;
+                    highestRatingText.textContent = data.highest_rating.toFixed(1);
+                    matchStatsEl.classList.remove('hidden');
                 } else {
-                    matchCountEl.classList.add('hidden');
+                    matchStatsEl.classList.add('hidden');
                 }
             }
         } catch (e) {
