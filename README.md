@@ -55,6 +55,3 @@ An intelligent, AI-powered dining concierge that goes beyond rigid search filter
    cd frontend
    npx serve .
    ```
-
-## 📝 License
-© 2026 Zomato AI Discovery. All rights reserved.
